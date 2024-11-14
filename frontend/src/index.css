@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#workpage{
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  column-gap: 30px;
+}
+
+#workform>div{
+  display: flex;
+  justify-content: space-between;
+}
+
+#workform>div>input{
+  border: 1px solid grey;
+}
+
+#logforms{
+  border: 2px solid black;
+  border-radius: 15px;
+  width: 600px;
+}
+
+#logForms>div{
+  display: flex;
+  justify-content: space-between;
+}
+
+#logForms>div>input{
+  border: 1px solid grey;
+}
