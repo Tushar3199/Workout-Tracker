@@ -1,21 +1,22 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
-const Login = ({setUser}) => {
+const Login = ({ setUser }) => {
 
   const initialData = {
     email:'',
     password:'',
   }
+
   const navigate = useNavigate();
   const [formData, setFormData] = useState(initialData)
   const [errors, setErrors] = useState(null)
 
-  const handleChange = (e) =>{
-    const {name, value} = e.target;
+  const handleChange = (e) => {
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]:value
+      [name]: value
     })
   }
 
@@ -37,8 +38,10 @@ const Login = ({setUser}) => {
       if(response.ok){
         setErrors(null)
         setFormData(initialData)
-        setUser({name: json.username})
-        localStorage.setItem('user', JSON.stringify({ name: json.username }))
+        const expirationTime = Date.now() + 3*24*60*60*1000
+        const userData = { name: json.username, expirationTime }
+        localStorage.setItem('user', JSON.stringify(userData))
+        setUser(userData)
         navigate('/')
       }
     } catch(err){

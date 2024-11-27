@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 
-const WorkoutForm = () => {
+const WorkoutForm = ({fetchWorkouts}) => {
 
   const initialData = {
     title:'',
@@ -36,6 +36,7 @@ const WorkoutForm = () => {
       if(response.ok){
         setFormData(initialData)
         setErrors(null)
+        fetchWorkouts()
         console.log('new workout added!', json)
       }
     } catch (err) {

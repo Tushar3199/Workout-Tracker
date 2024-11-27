@@ -16,7 +16,12 @@ function App() {
   useEffect(() => { 
     const storedUser = localStorage.getItem('user'); 
     if (storedUser) { 
-      setUser(JSON.parse(storedUser)); 
+      const { user, expirationTime } = JSON.parse(storedUser);
+      if( Date.now() > expirationTime ){
+        localStorage.removeItem('user')
+      }else{
+        setUser(user); 
+      }
     } 
   }, []);
 

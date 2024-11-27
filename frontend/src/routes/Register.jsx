@@ -15,10 +15,10 @@ const Register = ({setUser}) => {
   const [errors, setErrors] = useState(null)
 
   const handleChange = (e) =>{
-    const {name, value} = e.target;
+    const { name, value } = e.target;
     setFormData({
       ...formData,
-      [name]:value
+      [name]: value
     })
   }
 
@@ -40,7 +40,10 @@ const Register = ({setUser}) => {
       if(response.ok){
         setErrors(null)
         setFormData(initialData)
-        setUser({name: json.username})
+        const expirationTime = Date.now() + 3*24*60*60*1000;
+        const userData = { name: json.username, expirationTime };
+        localStorage.setItem('user', JSON.stringify(userData))
+        setUser(userData)
         navigate('/')
       }
     } catch (err) {

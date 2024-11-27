@@ -5,16 +5,15 @@ import WorkoutForm from '../components/WorkoutForm';
 const Workouts = () => {
   const [workouts, setWorkouts] = useState([]);
 
-  useEffect(()=>{
-
-    const fetchWorkouts = async() =>{
-      const response = await fetch('/api/workouts')
-      const json = await response.json();
-      if(response.ok){
-        setWorkouts(json)
-      }
+  const fetchWorkouts = async() =>{
+    const response = await fetch('/api/workouts')
+    const json = await response.json();
+    if(response.ok){
+      setWorkouts(json)
     }
-
+  }
+ 
+  useEffect(()=>{
     fetchWorkouts();
   }, [])
 
@@ -26,7 +25,7 @@ const Workouts = () => {
         ))}
       </div>
       <div className=''>
-        <WorkoutForm />
+        <WorkoutForm fetchWorkouts={fetchWorkouts} />
       </div>
     </div>
     
